@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using L012022AG652_2022FS651.Models;
 using L12022AG652_2022FS651.Models;
 
 namespace L012022AG652_2022FS651.Data
