@@ -7,7 +7,7 @@
         public string Direccion { get; set; }
     }
 
-    public class Pedido
+    public class Pedidos
     {
         public int PedidoId { get; set; }
         public int MotoristaId { get; set; }

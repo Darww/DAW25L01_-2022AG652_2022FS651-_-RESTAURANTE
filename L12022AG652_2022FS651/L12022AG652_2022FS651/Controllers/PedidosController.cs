@@ -7,18 +7,18 @@ namespace L12022AG652_2022FS651.Controllers
     [ApiController]
     public class PedidosController : ControllerBase
     {
-        private static List<Pedido> pedidos = new List<Pedido>();
+        private static List<Pedidos> pedidos = new List<Pedidos>();
 
         // GET: api/Pedidos
         [HttpGet]
-        public ActionResult<IEnumerable<Pedido>> GetPedidos()
+        public ActionResult<IEnumerable<Pedidos>> GetPedidos()
         {
             return Ok(pedidos);
         }
 
         // GET: api/Pedidos/5
         [HttpGet("{id}")]
-        public ActionResult<Pedido> GetPedido(int id)
+        public ActionResult<Pedidos> GetPedido(int id)
         {
             var pedido = pedidos.FirstOrDefault(p => p.PedidoId == id);
             if (pedido == null)
@@ -30,7 +30,7 @@ namespace L12022AG652_2022FS651.Controllers
 
         // POST: api/Pedidos
         [HttpPost]
-        public ActionResult<Pedido> PostPedido([FromBody] Pedido pedido)
+        public ActionResult<Pedidos> PostPedido([FromBody] Pedidos pedido)
         {
             pedidos.Add(pedido);
             return CreatedAtAction(nameof(GetPedido), new { id = pedido.PedidoId }, pedido);
@@ -38,7 +38,7 @@ namespace L12022AG652_2022FS651.Controllers
 
         // PUT: api/Pedidos/5
         [HttpPut("{id}")]
-        public IActionResult PutPedido(int id, [FromBody] Pedido pedido)
+        public IActionResult PutPedido(int id, [FromBody] Pedidos pedido)
         {
             var existingPedido = pedidos.FirstOrDefault(p => p.PedidoId == id);
             if (existingPedido == null)

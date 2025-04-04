@@ -8,7 +8,7 @@ namespace L012022AG652_2022FS651.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Pedidos> Pedidos { get; set; }
         public DbSet<Plato> Platos { get; set; }
         public DbSet<Motorista> Motoristas { get; set; }
     }

@@ -3,64 +3,39 @@ using L12022AG652_2022FS651.Models;
 
 namespace L12022AG652_2022FS651.Controllers
 {
-    [Route("api/[controller]")]
+   [Route("api/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
     {
-        private static List<Cliente> clientes = new List<Cliente>();
+        private readonly RestauranteContext _context;
 
-        // GET: api/Clientes
+        public ClientesController(RestauranteContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
-        public ActionResult<IEnumerable<Cliente>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            return Ok(clientes);
+            return await _context.Clientes.ToListAsync();
         }
 
-        // GET: api/Clientes/5
         [HttpGet("{id}")]
-        public ActionResult<Cliente> GetCliente(int id)
+        public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
-            var cliente = clientes.FirstOrDefault(c => c.ClienteId == id);
+            var cliente = await _context.Clientes.FindAsync(id);
             if (cliente == null)
-            {
                 return NotFound();
-            }
-            return Ok(cliente);
+            return cliente;
         }
 
-        // POST: api/Clientes
         [HttpPost]
-        public ActionResult<Cliente> PostCliente([FromBody] Cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
-            clientes.Add(cliente);
+            _context.Clientes.Add(cliente);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetCliente), new { id = cliente.ClienteId }, cliente);
         }
-
-        // PUT: api/Clientes/5
-        [HttpPut("{id}")]
-        public IActionResult PutCliente(int id, [FromBody] Cliente cliente)
-        {
-            var existingCliente = clientes.FirstOrDefault(c => c.ClienteId == id);
-            if (existingCliente == null)
-            {
-                return NotFound();
-            }
-            existingCliente.NombreCliente = cliente.NombreCliente;
-            existingCliente.Direccion = cliente.Direccion;
-            return NoContent();
-        }
-
-        // DELETE: api/Clientes/5
-        [HttpDelete("{id}")]
-        public IActionResult DeleteCliente(int id)
-        {
-            var cliente = clientes.FirstOrDefault(c => c.ClienteId == id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-            clientes.Remove(cliente);
-            return NoContent();
-        }
     }
+
 }
