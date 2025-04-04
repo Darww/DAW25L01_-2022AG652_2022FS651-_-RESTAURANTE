@@ -3,9 +3,9 @@ using L12022AG652_2022FS651.Models;
 
 namespace L012022AG652_2022FS651.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class RestauranteDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public RestauranteDbContext(DbContextOptions<RestauranteDbContext> options) : base(options) { }
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedidos> Pedidos { get; set; }
